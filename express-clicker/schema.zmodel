@@ -1,0 +1,19 @@
+datasource db {
+    provider = 'sqlite'
+    url = 'file:./clicker.db'
+}
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+model Pickaxe {
+    id       Int @id @default(autoincrement())
+    strength Int @unique
+}
+
+
+model Gold {
+    id       Int @id @default(autoincrement())
+    strength Int @unique
+}
