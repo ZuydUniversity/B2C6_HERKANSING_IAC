@@ -29,6 +29,7 @@ def create_app(test_config=None):
     def hello():
         return 'Hello, World!'
     
+    # Boots up the existing database and connects it to the application
     from flaskr import db
     db.init_app(app)
 
