@@ -20,21 +20,27 @@ db.init_app(app)
 bcrypt = Bcrypt(app)
 
 @app.route('/api/users', methods=['GET'])
-def users():
-    users = User.query.all()  
-   
-    user_list = []
-    for user in users:
-        user_data = {
-            'id': user.id,
-            'username': user.username,
-            'password': user.password  
-        }
-        user_list.append(user_data)
-    
-    return jsonify(user_list) 
+def get_user():
+    username = request.args.get('username')
+    if username:
+        user = User.query.filter_by(username=username).first()
+        if user:
+            return jsonify({"exists": True}), 200
+        else:
+            return jsonify({"exists": False}), 404
+    else:
+        users = User.query.all()
+        user_list = []
+        for user in users:
+            user_data = {
+                'id': user.id,
+                'username': user.username,
+                'password': user.password
+            }
+            user_list.append(user_data)
+        return jsonify(user_list)
 
 
 if __name__ == '__main__':
-    app.run(port=5555, debug=True)
+    app.run(port=5000, debug=True)
     
