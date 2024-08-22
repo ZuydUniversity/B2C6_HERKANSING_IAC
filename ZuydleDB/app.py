@@ -23,10 +23,10 @@ bcrypt = Bcrypt(app)
 @app.route('/api/users', methods=['GET', 'POST'])
 def users():
     if request.method == 'GET':
-        # Implement logic to fetch users from the database
+        return "hello"
         pass
     elif request.method == 'POST':
-        # Implement logic to create a new user in the database
+        return "hello"
         pass
 
 if __name__ == '__main__':
