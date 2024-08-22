@@ -21,19 +21,15 @@ bcrypt = Bcrypt(app)
 
 @app.route('/api/login', methods=['POST'])
 def login():
-    # Extract the username and password from the JSON body of the request
     data = request.get_json()
     username = data.get('username')
     password = data.get('password')
 
-    # Check if both username and password were provided
     if not username or not password:
         return jsonify({"error": "Username and password are required"}), 400
 
-    # Look for the user in the database
     user = User.query.filter_by(username=username).first()
 
-    # If user is found, check if the password matches
     if user and user.password == password:
         return jsonify({"success": True, "message": "Login successful!"}), 200
     else:
